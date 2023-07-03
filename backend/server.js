@@ -1,15 +1,16 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const { readdirSync } = require("fs");
 const app = express();
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("welcome from home");
-});
+readdirSync("./routes").map((r) => app.use("/", require("./routes/" + r)));
 
-app.get("/books", (req, res) => {
-  res.send("Welcome from books");
-});
-
-app.listen(8000, () => {
-  console.log("server is listening");
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}..`);
 });
