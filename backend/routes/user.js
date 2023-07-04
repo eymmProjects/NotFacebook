@@ -1,5 +1,5 @@
 const express = require("express");
-const { home } = require("../contrllers/user");
+const { register } = require("../contrllers/user");
 
 const router = express.Router();
 
@@ -7,6 +7,6 @@ const router = express.Router();
 //   res.send("welcome from user home");
 // });
 
-router.get("/user", home);
+router.post("/register", register);
 
 module.exports = router;
